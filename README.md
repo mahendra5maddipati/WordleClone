@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Wordle Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ -This is a Wordle clone built with React and Tailwind CSS.
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+Make sure you have the following installed on your machine:
 
-### `npm start`
+- Node.js (v14 or higher)
+- npm (v6 or higher)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Clone the repository**:
 
-### `npm test`
+   git clone https://github.com/your-username/wordle-clone.git
+   cd wordle-clone
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Install dependencies**
 
-### `npm run build`
+    -npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Build Tailwind CSS**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    -npm run build:css
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Start server**
 
-### `npm run eject`
+    -npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Project Structure
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `src/`
+  - `components/`: Contains React components such as `WordleGrid`, `Keyboard`, and `GameMessage`.
+  - `styles/`: Contains the Tailwind CSS configuration and custom styles.
+  - `index.js`: Entry point of the React application.
+  - `App.js`: Main application component.
+  - `reportWebVitals.js`: Performance measurement setup.
+  - `words.js`: List of words used in the game.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Scripts
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `npm start`: Starts the development server.
+- `npm run build`: Builds the app for production.
+- `npm run build:css`: Builds the Tailwind CSS file.
+- `npm test`: Runs the test suite.
+- `npm run eject`: Ejects the app from Create React App configuration.
 
-## Learn More
+## Tailwind CSS Configuration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Tailwind CSS is configured in the following files:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `tailwind.config.js`: Tailwind CSS configuration file.
+- `postcss.config.js`: PostCSS configuration file.
 
-### Code Splitting
+## Adding New Words
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+To add new words to the game, update the `words.js` file in the `src` directory with the new words.
 
-### Analyzing the Bundle Size
+Features
+ -Word guessing logic  
+ -Grid with color-coded feedback  
+ -Keyboard input  
+ -Game messages  
+ -Background image  
+ -TailwindCSS for styling  
+ -Responsive UI  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Structured
+ -What’s Included?
+ -Structured Components
+ -Background Image Styling
+ -Tailwind CSS for Clean UI
+ -Keyboard Input Handling
+ -Game Over Messages
+ -Responsive Design

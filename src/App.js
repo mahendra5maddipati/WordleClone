@@ -1,86 +1,56 @@
-import React, { useState, useEffect } from "react";
-import wordsList from "./wordsList";
-import './tailwind.css';
-import './index.css';
+import React, { useState } from 'react';
+import './styles/index.css';
+import WordleGrid from './components/WordleGrid';
+import Keyboard from './components/Keyboard';
+import GameMessage from './components/GameMessage';
+import words from './words';
 
-const Wordle = () => {
-  const [word, setWord] = useState("HELLO");
+const App = () => {
+  const [targetWord, setTargetWord] = useState(words[Math.floor(Math.random() * words.length)]);
   const [guesses, setGuesses] = useState([]);
-  const [currentGuess, setCurrentGuess] = useState("");
   const [gameOver, setGameOver] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    setWord(wordsList[Math.floor(Math.random() * wordsList.length)].toUpperCase());
-  }, []);
-
-  const handleGuess = () => {
-    if (currentGuess.length !== 5 || !wordsList.includes(currentGuess.toLowerCase())) {
-      setMessage("Invalid word");
+  const handleGuess = (guess) => {
+    if (guess.length !== 5 || gameOver) return;
+    if (!words.includes(guess)) {
+      setMessage('Invalid word!');
       return;
     }
 
-    const newGuesses = [...guesses, currentGuess];
-    setGuesses(newGuesses);
+    const feedback = guess.split('').map((letter, index) => {
+      if (letter === targetWord[index]) return 'green';
+      if (targetWord.includes(letter)) return 'yellow';
+      return 'gray';
+    });
 
-    if (currentGuess === word) {
-      setMessage("Congratulations! You won!");
-      setGameOver(true);
-      return;
-    }
+    setGuesses([...guesses, { word: guess, feedback }]);
 
-    if (newGuesses.length >= 6) {
-      setMessage(`Game Over! The word was ${word}`);
+    if (guess === targetWord) {
       setGameOver(true);
+      setMessage('You Win!');
+    } else if (guesses.length >= 5) {
+      setGameOver(true);
+      setMessage(`Game Over! The word was ${targetWord}`);
     }
-    setCurrentGuess("");
   };
 
-  const getColor = (letter, index) => {
-    if (word[index] === letter) return "bg-green-500";
-    if (word.includes(letter)) return "bg-yellow-500";
-    return "bg-gray-500";
+  const resetGame = () => {
+    setTargetWord(words[Math.floor(Math.random() * words.length)]);
+    setGuesses([]);
+    setGameOver(false);
+    setMessage('');
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4">
+    <div className="bg-cover bg-center min-h-screen flex flex-col items-center justify-center text-white bg-wordle">
       <h1 className="text-4xl font-bold mb-4">Wordle Clone</h1>
-      <div className="grid grid-rows-6 gap-2">
-        {Array.from({ length: 6 }).map((_, rowIndex) => (
-          <div key={rowIndex} className="grid grid-cols-5 gap-2">
-            {Array.from({ length: 5 }).map((_, colIndex) => {
-              const letter = guesses[rowIndex]?.[colIndex] || "";
-              return (
-                <div key={colIndex} className={`w-12 h-12 flex items-center justify-center border ${letter ? getColor(letter, colIndex) : "border-gray-500"} text-2xl font-bold uppercase`}>{letter}</div>
-              );
-            })}
-          </div>
-        ))}
-      </div>
-      <input
-        type="text"
-        maxLength={5}
-        value={currentGuess}
-        onChange={(e) => setCurrentGuess(e.target.value.toUpperCase())}
-        disabled={gameOver}
-        className="mt-4 p-2 text-black rounded-md"
-      />
-      <button
-        onClick={handleGuess}
-        disabled={gameOver}
-        className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
-      >
-        Submit
-      </button>
-      <button
-        onClick={() => window.location.reload()}
-        className="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-      >
-        New Game
-      </button>
-      {message && <p className="mt-4 text-xl">{message}</p>}
+      <WordleGrid guesses={guesses} />
+      <Keyboard onGuess={handleGuess} />
+      <GameMessage message={message} />
+      {gameOver && <button className="mt-4 px-4 py-2 bg-blue-500 rounded" onClick={resetGame}>New Game</button>}
     </div>
   );
 };
 
-export default Wordle;
+export default App;
